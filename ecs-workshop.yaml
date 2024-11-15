@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+################################################################################
+#
+# DESCRIPTION
+#
+##############################################################################
+################################################################################
+#
+# RESOURCES
+#
+##############################################################################
+Resources:
+  rECRRepo:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: hello-server
+  rECRRepoParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Description: ECR Repository
+      Name: ecr-repo-name
+      Type: String
+      Value: !Ref rECRRepo
+  rECSLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        LogGroupName: /ecs/hello-server
+###############################################################################
+#
+# OUTPUTS
+#
+###############################################################################
